@@ -8,31 +8,33 @@ let selectedChoices = {
   three: null
 };
 
-choices.forEach((choice) => {
-  choice.addEventListener('click', () => {
-    const choiceId = choice.dataset.choiceId;
-    const questionId = choice.dataset.questionId;
-  
-    if (selectedChoices[questionId] === choiceId) {
-      selectedChoices[questionId] = null;
-      choice.style.backgroundColor = 'inherit';
-      choice.style.opacity = 0.6;
-      choice.querySelector('.checkbox').src = 'images/unchecked.png';
-    } else {
-  
-      if (selectedChoices[questionId] !== null) {
-        const prevChoice = document.querySelector(`[data-choice-id='${selectedChoices[questionId]}'][data-question-id='${questionId}']`);
-        prevChoice.style.backgroundColor = 'inherit';
-        prevChoice.style.opacity = 0.6;
-        prevChoice.querySelector('.checkbox').src = 'images/unchecked.png';
-      }
-  
-      selectedChoices[questionId] = choiceId;
-      choice.style.backgroundColor = '#cfe3ff';
-      choice.style.opacity = 1;
-      choice.querySelector('.checkbox').src = 'images/checked.png';
+function handleClick() {
+  const choiceId = this.dataset.choiceId;
+  const questionId = this.dataset.questionId;
+
+  if (selectedChoices[questionId] === choiceId) {
+    selectedChoices[questionId] = null;
+    this.style.backgroundColor = 'inherit';
+    this.style.opacity = 0.6;
+    this.querySelector('.checkbox').src = 'images/unchecked.png';
+  } else {
+
+    if (selectedChoices[questionId] !== null) {
+      const prevChoice = document.querySelector(`[data-choice-id='${selectedChoices[questionId]}'][data-question-id='${questionId}']`);
+      prevChoice.style.backgroundColor = 'inherit';
+      prevChoice.style.opacity = 0.6;
+      prevChoice.querySelector('.checkbox').src = 'images/unchecked.png';
     }
-  });
+
+    selectedChoices[questionId] = choiceId;
+    this.style.backgroundColor = '#cfe3ff';
+    this.style.opacity = 1;
+    this.querySelector('.checkbox').src = 'images/checked.png';
+  }
+}
+
+choices.forEach((choice) => {
+  choice.addEventListener('click', handleClick);
 });
 
 
@@ -40,10 +42,14 @@ const submitButton = document.querySelector('#submit-button');
 
 submitButton.addEventListener('click', () => {
 
-
   if (selectedChoices.one !== null && selectedChoices.two !== null && selectedChoices.three !== null) {
  
     let answer;
+
+    choices.forEach((choice) => {
+      choice.removeEventListener('click', handleClick);
+    });
+    
 
     if(selectedChoices.two === selectedChoices.three){
       answer = selectedChoices.two;
