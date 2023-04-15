@@ -1,0 +1,66 @@
+/* TODO: inserite il CSS necessario per completare il MHW! */
+
+.choice-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.choice-grid > div {
+  border: 1px solid #dcdcdc;
+  width: calc(32.5% - 20px);
+  margin-bottom: 20px;
+  background-color: #f4f4f4;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  opacity: 0.6;
+}
+
+.choice-grid > div > img {
+  display: block;
+  width: 100%;
+  height: calc(100% - 20px);
+  object-fit: cover;
+}
+
+#submit-button {
+  background-color: #cecece;
+  border: none;
+  color: #222222;
+  font-size: 18px;
+  height: 50px;
+  display: block;
+  width: 100%;
+  padding: 0 20px;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+#submit-button:hover {
+  background-color: #e0e0e0;
+}
+
+.result-container-styles{
+  padding: 20px 20px 0 20px;
+}
+
+/* Modifiche per la visualizzazione da mobile */
+@media only screen and (max-width: 700px) {
+/* Imposta la larghezza del contenuto a 95% se la larghezza dello schermo è minore di 700px */
+article {
+  width: 95%;
+}
+/* Nasconde i cerchi gialli nell'header se la larghezza dello schermo è minore di 700px */
+header div span {
+  display: none;
+}
+}
+
+@media only screen and (max-width: 500px) {
+/* Imposta la larghezza delle risposte a 49% se la larghezza dello schermo è minore di 500px */
+.choice-grid > div {
+  width: calc(49% - 20px);
+}
+}
