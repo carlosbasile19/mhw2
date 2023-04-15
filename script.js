@@ -1,6 +1,7 @@
 /* TODO: inserite il codice JavaScript necessario a completare il MHW! */
 
 const choices = document.querySelectorAll('.choice-grid > div');
+const submitButton = document.querySelector('#submit-button');
 
 let selectedChoices = {
   one: null,
@@ -33,23 +34,26 @@ function handleClick() {
   }
 }
 
+//Creo una funzione da inviare al handler piuttosto che crearla anonima visto che
+//Successivamente devo toglierla 
+
 choices.forEach((choice) => {
   choice.addEventListener('click', handleClick);
 });
 
-
-const submitButton = document.querySelector('#submit-button');
-
 submitButton.addEventListener('click', () => {
 
+  //Verifico che tutte le risposte siano state selezionate 
+
   if (selectedChoices.one !== null && selectedChoices.two !== null && selectedChoices.three !== null) {
- 
+
     let answer;
 
     choices.forEach((choice) => {
       choice.removeEventListener('click', handleClick);
     });
-    
+
+    //Aggiungo la logica per la scelta della risposta
 
     if(selectedChoices.two === selectedChoices.three){
       answer = selectedChoices.two;
@@ -59,6 +63,8 @@ submitButton.addEventListener('click', () => {
 
     const result = RESULTS_MAP[answer].title;
     const resultContents = RESULTS_MAP[answer].contents;
+
+    //Aggiungo gli elementi per mostrare la risposta
 
     const resultTitle = document.createElement('h1');
     resultTitle.textContent = result;
@@ -75,8 +81,27 @@ submitButton.addEventListener('click', () => {
     resultContainer.appendChild(resultContentsElem);
     resultContainer.appendChild(restartButton);
 
+    // Facciamo reset del gioco
+
     restartButton.addEventListener('click', () => {
-      location.reload();
+      selectedChoices = {
+        one: null,
+        two: null,
+        three: null
+      };
+      
+      resultContainer.removeChild(resultTitle);
+      resultContainer.removeChild(resultContentsElem);
+      resultContainer.removeChild(restartButton);
+      submitButton.style.display = 'block';
+
+      choices.forEach((choice) => {
+        choice.addEventListener('click', handleClick);
+        choice.style.backgroundColor = 'inherit';
+        choice.style.opacity = 0.6;
+        choice.querySelector('.checkbox').src = 'images/unchecked.png';
+      });
+
     });
 
     submitButton.style.display = 'none';
