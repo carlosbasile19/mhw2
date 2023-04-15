@@ -46,13 +46,11 @@
   padding: 20px 20px 0 20px;
 }
 
-/* Modifiche per la visualizzazione da mobile */
 @media only screen and (max-width: 700px) {
-/* Imposta la larghezza del contenuto a 95% se la larghezza dello schermo è minore di 700px */
 article {
   width: 95%;
 }
-/* Nasconde i cerchi gialli nell'header se la larghezza dello schermo è minore di 700px */
+
 header div span {
   display: none;
 }
