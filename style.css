@@ -57,7 +57,7 @@ header div span {
 }
 
 @media only screen and (max-width: 500px) {
-/* Imposta la larghezza delle risposte a 49% se la larghezza dello schermo è minore di 500px */
+
 .choice-grid > div {
   width: calc(49% - 20px);
 }
